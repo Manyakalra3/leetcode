@@ -5,7 +5,7 @@ class Solution {
         
         for(int i=0;i<grid.length;i++){
             for(int j=0;j<grid[0].length;j++){
-                if(grid[i][j]=='1'){
+                if(grid[i][j]=='1' && visited[i][j]!=true){
                     
                     floodfill(grid,i,j,visited);
                     count++;
@@ -20,7 +20,7 @@ class Solution {
             return;
         }
         visited[i][j]=true;
-        grid[i][j]='0';
+        //grid[i][j]='0';
         floodfill(grid,i-1,j,visited);
         floodfill(grid,i+1,j,visited);
         floodfill(grid,i,j-1,visited);
