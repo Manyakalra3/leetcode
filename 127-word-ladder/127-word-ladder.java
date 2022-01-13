@@ -1,3 +1,5 @@
+
+//o(n(m2))
 class Solution {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
     Queue<String> queue = new LinkedList<>();
