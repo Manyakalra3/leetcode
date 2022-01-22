@@ -1,14 +1,19 @@
 class Solution {
+    Boolean[]dp = new Boolean[100001];
     public boolean winnerSquareGame(int n) {
-        boolean[] dp = new boolean[n + 1];
-        for (int i = 0; i < n + 1; i++) {
-            for (int k = 1; k * k <= i; k++) {
-                if (dp[i - k * k] == false) {
-                    dp[i] = true;
-                    break;
-                }
+        
+       return helper(n,dp);
+    }
+    public boolean helper(int n,Boolean[]dp){
+         if(n ==0)return false;
+        if(dp[n]!=null)return dp[n];
+        boolean winner= false;
+        for(int i=1;i*i<=n;i++){
+            if(!helper(n-(i*i),dp)){
+                winner=true;
+                break;
             }
-        }
-        return dp[n];
+        }   
+        return dp[n]= winner;
     }
 }
