@@ -1,18 +1,22 @@
 class Solution {
     public List<Integer> sequentialDigits(int low, int high) {
-       int start = 1, cur = 1, inc = 11, t = 8;
-        List<Integer> ans = new ArrayList<>();
-        while(cur <= high){
-            for (int i = 0; i < t; i++){
-                cur += inc;
-                if (cur >= low && cur <= high) ans.add(cur);
+    
+        List<Integer> list =  new ArrayList<>();
+        int number = 12;  // Initial smallest valid number
+        int nextdigit=3;   // next digit of the valid number eg 123
+        while(number<90){
+            int counter = number;  // counter number for computation
+            int counterdigit = nextdigit;
+            while(counter <= high && counterdigit < 11){
+                if(counter >= low) list.add(counter);
+                counter = counter*10 + counterdigit;
+                counterdigit++;
             }
-            inc = 10 * inc + 1;
-            start = 10 * start + 10 - t;
-            cur = start;
-            t--;
+            number+=11;  // every valid number will start with 12,23,34,45 and so on, the difference is always 11.
+            nextdigit++;
         }
-
-        return ans; 
+        Collections.sort(list);
+        return list;
     }
 }
+   
