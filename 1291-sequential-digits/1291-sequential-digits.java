@@ -1,13 +1,18 @@
 class Solution {
-     SortedSet<Integer> set;
     public List<Integer> sequentialDigits(int low, int high) {
-        set = new TreeSet<>();
-        for(int i=1;i<=9;i++) helper(i);
-        return new ArrayList<>(set.subSet(low,high+1));
-    }
-    public void helper(int start){
-        if(start%10==9) {set.add(start);return;}
-        set.add(start);
-        helper(start*10 + (start%10+1));
+       int start = 1, cur = 1, inc = 11, t = 8;
+        List<Integer> ans = new ArrayList<>();
+        while(cur <= high){
+            for (int i = 0; i < t; i++){
+                cur += inc;
+                if (cur >= low && cur <= high) ans.add(cur);
+            }
+            inc = 10 * inc + 1;
+            start = 10 * start + 10 - t;
+            cur = start;
+            t--;
+        }
+
+        return ans; 
     }
 }
