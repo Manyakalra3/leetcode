@@ -3,10 +3,10 @@ class Solution {
        int[]color= new int[graph.length];
         Arrays.fill(color,-1);
     for(int i=0;i<color.length;i++){
-        if(color[i]==-1){
+     //   if(color[i]==-1){
         if(!dfs(color.length,i,color,graph))
             return false;
-        }
+       // }
     }
         return true;
     }
