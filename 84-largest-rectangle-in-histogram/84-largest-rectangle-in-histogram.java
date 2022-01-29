@@ -1,30 +1,47 @@
 class Solution {
-    public int largestRectangleArea(int[] heights) {
- int len = heights.length;
-    int maxsize = 0;
-    if(len==0) return 0 ;
-    Stack<Integer> hstack = new Stack<>();
-    Stack<Integer> pstack = new Stack<>();
-    for(int i = 0;i<=len;i++){
-        int currheight;
-        if(i==len) {
-            currheight = 0;
-        }
-        else currheight = heights[i];
-        if(hstack.empty()||currheight>hstack.peek()){
-            hstack.push(currheight);
-            pstack.push(i);
-        }
-        else if(currheight<hstack.peek()){
-            int last = -1;
-            while(!hstack.empty()&&currheight<hstack.peek()){
-                maxsize = maxsize>(i-pstack.peek())*hstack.peek()?maxsize:(i-pstack.peek())*hstack.peek();
-                last = pstack.pop();
-                hstack.pop();
-            }
-            pstack.push(last);
-            hstack.push(currheight);
-        }
+    public int largestRectangleArea(int[] arr) {
+    //smallestotleft
+       int []rb= new int[arr.length];
+    Stack<Integer>st= new Stack<>();
+    st.push(arr.length-1);
+    rb[arr.length-1]=arr.length;
+    for(int i=arr.length-2;i>=0;i--){
+        while(st.size()>0&& arr[i]<=arr[st.peek()]){
+        st.pop();
+        
     }
-    return maxsize;
-}}
+    if(st.size()==0){
+        rb[i]=arr.length;
+    }else{
+        rb[i]=st.peek();
+    }
+    st.push(i);
+    
+ }
+ int[]lb= new int[arr.length];
+ st= new Stack<>();
+ st.push(0);
+ lb[0]=-1;
+         for(int i=1;i<arr.length;i++){
+     while(st.size()>0 &&arr[st.peek()]>=arr[i]){
+         st.pop();
+     } 
+     if(st.size()==0){
+         lb[i]=-1;
+     }else{
+         lb[i]=st.peek();
+     }
+     st.push(i);
+     
+ }
+ int max=0;
+ for(int i=0;i<arr.length;i++){
+     int width = rb[i]-lb[i]-1;
+     int area= width*arr[i];
+     if(area>max){
+        max=area;
+     }
+     
+ }
+return max;
+    }}
