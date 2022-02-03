@@ -8,7 +8,7 @@ class Solution {
         int count = 0;
         for(int i : nums1)
             for(int j : nums2)
-                        count += map.getOrDefault(-(i + j), 0);
+                        count += map.getOrDefault(-(i + j),0);
         return count;
     }
 }
